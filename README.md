@@ -1,0 +1,138 @@
+# thesis-format-cn
+
+> 一键将 Word 文档格式化为符合中国高校学位论文规范的格式
+
+自动修正页边距、标题字体、正文排版、三线表、图表编号、参考文献、页眉页码、目录等全部格式要素。基于 [python-docx](https://github.com/python-openxml/python-docx) 实现，无需安装 Microsoft Word。
+
+目前支持 **清华大学** 研究生学位论文格式（依据《清华大学研究生学位论文写作指南》202605 版），架构设计支持扩展其他高校规范。
+
+## 功能一览
+
+| 格式要素 | 规范要求 | 自动处理 |
+|---------|---------|---------|
+| 页面设置 | A4，页边距 3cm，页眉页脚 2.2cm | ✅ |
+| 章标题 | 三号(16pt)黑体居中，"第X章"格式 | ✅ |
+| 节标题 | 四号(14pt)黑体居左 | ✅ |
+| 正文 | 小四(12pt)宋体，首行缩进2字符，固定值20磅 | ✅ |
+| 图题 | 11pt宋体居中，按章编号(图X.Y) | ✅ |
+| 表题 | 11pt宋体居中，按章编号(表X.Y) | ✅ |
+| 三线表 | 上下线1.5磅，表头线1磅，无竖线 | ✅ |
+| 参考文献 | 五号(10.5pt)，悬挂缩进2字符 | ✅ |
+| 字体颜色 | 全文统一黑色 | ✅ |
+| 页眉页脚 | 五号居中篇眉 + 页码 | ✅ |
+| 目录 | TOC域自动生成 | ✅ |
+| 分页符 | 每章另起页 | ✅ |
+| 格式审计 | 逐项检查并输出报告 | ✅ |
+
+## 快速开始
+
+### 安装依赖
+
+```bash
+pip install python-docx
+```
+
+### 一键格式化
+
+```bash
+python scripts/format_thu_thesis.py input.docx output.docx
+```
+
+### 格式审计
+
+```bash
+python scripts/audit_thu_thesis.py input.docx
+```
+
+### 在 Python 中调用
+
+```python
+from scripts.format_thu_thesis import format_thu_thesis
+
+# 一键格式化
+format_thu_thesis("input.docx", "output.docx")
+
+# 或按需调用单个函数
+from docx import Document
+from scripts.format_thu_thesis import fix_page_setup, fix_three_line_tables
+
+doc = Document("input.docx")
+fix_page_setup(doc)
+fix_three_line_tables(doc)
+doc.save("output.docx")
+```
+
+### 格式化后
+
+打开 Word 文档，右键目录区域选择 **"更新域"** 即可生成目录内容。
+
+## 格式规范速查
+
+详细规范见 [references/thu_format_spec.md](references/thu_format_spec.md)。
+
+| 元素 | 中文字体 | 英文字体 | 字号 | 对齐 | 行距 | 段前 | 段后 |
+|------|---------|---------|------|------|------|------|------|
+| 章标题 | 黑体 | Arial | 16pt | 居中 | 单倍 | 24磅 | 18磅 |
+| 节标题 | 黑体 | Arial | 14pt | 居左 | 固定值20磅 | 24磅 | 6磅 |
+| 正文 | 宋体 | Times New Roman | 12pt | 两端对齐 | 固定值20磅 | 0 | 0 |
+| 图题 | 宋体 | Times New Roman | 11pt | 居中 | 单倍 | 6磅 | 12磅 |
+| 表题 | 宋体 | Times New Roman | 11pt | 居中 | 单倍 | 12磅 | 6磅 |
+| 参考文献 | 宋体 | Times New Roman | 10.5pt | 两端对齐 | 固定值16磅 | 3磅 | 0 |
+
+三线表规范：
+- 顶线（上边线）：1.5 磅
+- 表头线（第三条线）：1 磅
+- 底线（下边线）：1.5 磅
+- 无竖线，中间行无横线
+
+## 作为 CodeBuddy Skill 使用
+
+本项目同时是一个 [CodeBuddy](https://www.codebuddy.ai) Skill。将 `thu-thesis-format` 目录放入 `~/.codebuddy/skills/` 后，在对话中提到"论文格式"、"三线表"、"清华论文"等关键词即可自动触发。
+
+## 支持的高校
+
+| 高校 | 状态 | 规范来源 |
+|------|------|---------|
+| 清华大学 | ✅ 已支持 | 研究生学位论文写作指南（202605）|
+| 其他高校 | 🔜 规划中 | 欢迎贡献 |
+
+### 添加新高校支持
+
+1. 在 `references/` 下添加该校的格式规范文档
+2. 在 `scripts/` 下添加对应的 `format_xxx.py` 脚本
+3. 参考清华规范的实现方式，调整字体、字号、间距等参数
+
+欢迎通过 PR 贡献新高校的格式支持！
+
+## 技术细节
+
+### python-docx 单位换算
+
+| 单位 | 换算关系 |
+|------|---------|
+| 1 磅 (pt) | 12700 EMU / 20 twips |
+| 1 cm | 360000 EMU |
+| 1 汉字符 | 约 12pt = 240 twips |
+| 字号 sz 属性 | 半磅，如 16pt → sz=32 |
+| 边框 sz 属性 | 八分之一磅，如 1.5磅 → sz=12 |
+
+### 常见坑
+
+1. **Heading 样式蓝色**：Word 内置 Heading 1/2/3 样式默认有蓝色 (365F91, 4F81BD)，必须同时修改样式定义和 run 级别颜色
+2. **Pt(0) 是 falsy**：python-docx 中 `Pt(0)` 为 falsy 值，审计时需直接检查 XML 的 `w:spacing` 属性
+3. **TOC 域需手动更新**：python-docx 无法自动生成目录内容，插入 TOC 域后需在 Word 中右键"更新域"
+4. **PAGE 域**：页码通过 Word PAGE 域实现，python-docx 检测文本为空但 Word 中正常显示
+
+## 免责声明
+
+本项目为独立开源工具，与清华大学官方无任何关联。项目中的格式参数基于公开的《研究生学位论文写作指南》提取，仅供参考。实际提交论文时，请以学校官方发布的最新指南和院系要求为准。如格式规范有更新，欢迎提交 Issue 或 PR。
+
+## License
+
+MIT License - 详见 [LICENSE](LICENSE)
+
+## 致谢
+
+- 格式规范来源：清华大学研究生院公开发布的《研究生学位论文写作指南》
+- 参考实现：[thuthesis](https://github.com/tuna/thuthesis) LaTeX 模板（MIT/LPPL 许可）
+- 依赖库：[python-docx](https://github.com/python-openxml/python-docx)
