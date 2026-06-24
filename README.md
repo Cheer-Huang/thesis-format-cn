@@ -1,5 +1,9 @@
 # thesis-format-cn
 
+<p align="center">
+  <img src="assets/hero.png" alt="thesis-format-cn 功能概览" width="600">
+</p>
+
 > 一键将 Word 文档格式化为符合中国高校学位论文规范的格式
 
 ## 为什么需要这个工具

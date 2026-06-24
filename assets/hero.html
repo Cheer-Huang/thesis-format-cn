@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  width: 1200px; height: 400px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.title-block {
+  position: absolute; top: 30px; left: 50px;
+}
+.title-block h1 {
+  font-size: 32px; font-weight: 800; color: #fff;
+  letter-spacing: -.02em;
+}
+.title-block h1 .accent { color: #660874; }
+.title-block p {
+  font-size: 14px; color: rgba(255,255,255,.5); margin-top: 6px;
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+.container {
+  display: flex; align-items: center; gap: 16px;
+}
+.card {
+  width: 160px; height: 130px;
+  border-radius: 14px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,.3);
+  text-align: center; padding: 12px;
+}
+.card-icon { font-size: 32px; margin-bottom: 8px; }
+.card-title { font-size: 15px; font-weight: 700; color: #fff; }
+.card-spec { font-size: 11px; color: rgba(255,255,255,.6); margin-top: 3px; }
+
+.c1 { background: linear-gradient(135deg, #660874 0%, #9333AE 100%); }
+.c2 { background: linear-gradient(135deg, #1565A0 0%, #2d6cdf 100%); }
+.c3 { background: linear-gradient(135deg, #2F7D4F 0%, #52c41a 100%); }
+.c4 { background: linear-gradient(135deg, #B0893F 0%, #e8a838 100%); }
+.c5 { background: linear-gradient(135deg, #C0392B 0%, #e74c3c 100%); }
+
+.badge-row {
+  position: absolute; bottom: 30px; left: 50px;
+  display: flex; gap: 10px;
+}
+.badge {
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 600;
+  background: rgba(255,255,255,.1); color: rgba(255,255,255,.7);
+  border: 1px solid rgba(255,255,255,.15);
+}
+.badge-mit { background: rgba(39,174,96,.2); color: #2ecc71; border-color: rgba(39,174,96,.3); }
+.badge-skill { background: rgba(102,8,116,.3); color: #c084fc; border-color: rgba(102,8,116,.4); }
+
+.deco-circle { position: absolute; border-radius: 50%; opacity: .06; }
+.deco1 { width: 300px; height: 300px; top: -100px; right: -80px; background: #660874; }
+.deco2 { width: 200px; height: 200px; bottom: -60px; left: 200px; background: #1565A0; }
+</style>
+</head>
+<body>
+<div class="deco-circle deco1"></div>
+<div class="deco-circle deco2"></div>
+
+<div class="title-block">
+  <h1>thesis-format<span class="accent">-cn</span></h1>
+  <p>一键将 Word 文档格式化为符合中国高校学位论文规范的格式</p>
+</div>
+
+<div class="container">
+  <div class="card c1">
+    <div class="card-icon">&#128221;</div>
+    <div class="card-title">页面设置</div>
+    <div class="card-spec">3cm 边距 · A4</div>
+  </div>
+  <div class="card c2">
+    <div class="card-icon">&#127919;</div>
+    <div class="card-title">标题字体</div>
+    <div class="card-spec">黑体 16pt 居中</div>
+  </div>
+  <div class="card c3">
+    <div class="card-icon">&#128202;</div>
+    <div class="card-title">三线表</div>
+    <div class="card-spec">1.5磅 · 1磅</div>
+  </div>
+  <div class="card c4">
+    <div class="card-icon">&#128209;</div>
+    <div class="card-title">图表编号</div>
+    <div class="card-spec">按章 · 图X.Y</div>
+  </div>
+  <div class="card c5">
+    <div class="card-icon">&#128218;</div>
+    <div class="card-title">参考文献</div>
+    <div class="card-spec">悬挂缩进 · 五号</div>
+  </div>
+</div>
+
+<div class="badge-row">
+  <span class="badge badge-mit">MIT License</span>
+  <span class="badge badge-skill">CodeBuddy / Claude Code / Trae Skill</span>
+  <span class="badge">python-docx</span>
+  <span class="badge">清华大学 202605</span>
+</div>
+</body>
+</html>
