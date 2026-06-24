@@ -72,6 +72,18 @@ Run the audit script again to verify all formatting is correct:
 python scripts/audit_thu_thesis.py <output.docx>
 ```
 
+## Critical Workflow Rule
+
+Formatting is the **last step** before submission. The correct workflow is:
+
+1. Edit content (add/remove paragraphs, modify text, insert figures/tables)
+2. Confirm content is final
+3. Run formatting script
+4. Update TOC in Word
+5. Submit
+
+**Do NOT edit the document after formatting.** AI agents that insert new paragraphs or modify text after formatting may inherit default Word styles, breaking the carefully set fonts, indents, line spacing, and table borders. If content changes are needed, make them first, then re-run the formatting script.
+
 ## Format Specifications
 
 Detailed format specifications are in `references/thu_format_spec.md`. Key specs:
