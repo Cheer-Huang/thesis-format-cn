@@ -15,9 +15,24 @@
 
 手动逐项调整这些格式耗时且容易遗漏。**thesis-format-cn** 在生成初稿后一键运行，自动修正上述全部格式问题，让 AI 产出的报告直接达到学位论文提交标准。
 
-## 功能一览
+## 两种使用方式
 
-自动修正页边距、标题字体、正文排版、三线表、图表编号、参考文献、页眉页码、目录等全部格式要素。基于 [python-docx](https://github.com/python-openxml/python-docx) 实现，无需安装 Microsoft Word。
+### 方式一：作为 CodeBuddy Skill（推荐）
+
+本项目同时是一个 [CodeBuddy](https://www.codebuddy.ai) Skill。安装后，在 CodeBuddy 对话中用 AI 生成 Word 报告，然后直接说"按清华论文格式排版"即可自动触发格式化，无需手动运行脚本。
+
+安装方式：将本项目放入 `~/.codebuddy/skills/` 目录即可。触发关键词包括"论文格式"、"三线表"、"清华论文"、"thesis format"等。
+
+### 方式二：命令行工具
+
+作为独立的 Python 命令行工具使用，适用于任何工作流：
+
+```bash
+pip install python-docx
+python scripts/format_thu_thesis.py input.docx output.docx
+```
+
+基于 [python-docx](https://github.com/python-openxml/python-docx) 实现，无需安装 Microsoft Word。
 
 目前支持 **清华大学** 研究生学位论文格式（依据《清华大学研究生学位论文写作指南》202605 版），架构设计支持扩展其他高校规范。
 
@@ -99,10 +114,6 @@ doc.save("output.docx")
 - 表头线（第三条线）：1 磅
 - 底线（下边线）：1.5 磅
 - 无竖线，中间行无横线
-
-## 作为 CodeBuddy Skill 使用
-
-本项目同时是一个 [CodeBuddy](https://www.codebuddy.ai) Skill。将 `thu-thesis-format` 目录放入 `~/.codebuddy/skills/` 后，在对话中提到"论文格式"、"三线表"、"清华论文"等关键词即可自动触发。
 
 ## 支持的高校
 
