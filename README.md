@@ -17,11 +17,50 @@
 
 ## 两种使用方式
 
-### 方式一：作为 CodeBuddy Skill（推荐）
+### 方式一：作为 AI Agent Skill（推荐）
 
-本项目同时是一个 [CodeBuddy](https://www.codebuddy.ai) Skill。安装后，在 CodeBuddy 对话中用 AI 生成 Word 报告，然后直接说"按清华论文格式排版"即可自动触发格式化，无需手动运行脚本。
+本项目是一个标准 Skill 包，可安装到各类 AI 编程助手中。安装后，用 AI 生成 Word 报告，然后直接说"按清华论文格式排版"即可自动触发格式化，无需手动运行脚本。
 
-安装方式：将本项目放入 `~/.codebuddy/skills/` 目录即可。触发关键词包括"论文格式"、"三线表"、"清华论文"、"thesis format"等。
+#### 安装指南
+
+**CodeBuddy：**
+
+```bash
+git clone https://github.com/Cheer-Huang/thesis-format-cn.git ~/.codebuddy/skills/thu-thesis-format
+```
+
+安装后在 CodeBuddy 对话中提到"论文格式"、"三线表"、"清华论文"等关键词即可自动触发。
+
+**Claude Code：**
+
+```bash
+git clone https://github.com/Cheer-Huang/thesis-format-cn.git ~/.claude/skills/thu-thesis-format
+```
+
+在项目根目录的 `CLAUDE.md` 中添加引用：
+```markdown
+## Skills
+- 论文格式化: ~/.claude/skills/thu-thesis-format/SKILL.md
+```
+
+**Trae / 其他 Agent：**
+
+将本项目克隆到任意目录，在 Agent 的系统提示或项目配置中引用 `SKILL.md`：
+
+```bash
+git clone https://github.com/Cheer-Huang/thesis-format-cn.git ~/skills/thesis-format-cn
+```
+
+然后在 Agent 配置中添加：
+```
+当用户提到"论文格式"、"三线表"、"清华论文"、"thesis format"等关键词时，
+参考 ~/skills/thesis-format-cn/SKILL.md 中的指引，运行 scripts/ 下的脚本完成格式化。
+```
+
+**通用方式（任何 Agent 均可）：**
+
+直接告诉 Agent：
+> 请阅读 `~/skills/thesis-format-cn/SKILL.md`，按照其中的工作流程帮我格式化论文。
 
 ### 方式二：命令行工具
 
