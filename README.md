@@ -53,7 +53,7 @@ git clone https://github.com/Cheer-Huang/thesis-format-cn.git ~/skills/thesis-fo
 
 然后在 Agent 配置中添加：
 ```
-当用户提到"论文格式"、"三线表"、"清华论文"、"thesis format"等关键词时，
+当用户提到"论文格式"、"学位论文"、"毕业论文"、"三线表"、"thesis format"等关键词时，
 参考 ~/skills/thesis-format-cn/SKILL.md 中的指引，运行 scripts/ 下的脚本完成格式化。
 ```
 
